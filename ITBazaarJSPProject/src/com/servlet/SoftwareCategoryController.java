@@ -51,8 +51,6 @@ public class SoftwareCategoryController extends HttpServlet {
 		{
 			String selected_software=request.getParameter("software");
 			int category_id=Integer.parseInt(selected_software);
-			System.out.println("*************************");
-			System.out.println(category_id);
 			
 			
 			AdminOperationsService adminOperationService=new AdminOperationsServiceImpl();

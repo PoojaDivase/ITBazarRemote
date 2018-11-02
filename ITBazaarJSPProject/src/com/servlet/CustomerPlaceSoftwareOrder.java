@@ -95,8 +95,6 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 				CustomerOrderService customerPlaceOrder=new CustomerOrderServiceImpl();
 				Order order=new Order();
 				order=customerPlaceOrder.PlaceSoftwareOrder(software,customer_id);
-				System.out.println("***********************");
-				System.out.println(order);
 				if(order==null)
 				{
 					continue;
@@ -107,7 +105,6 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 					currentorder.add(order);
 				}
 			}
-			System.out.println("****************");
 			for(Order o:currentorder)
 			{
 				System.out.println(o);

@@ -52,7 +52,6 @@ public class AdminDeleteSoftware extends HttpServlet {
 			
 			SoftwareDetailsService softwareDetailsService=new SoftwareDetailsServiceImpl();
 			SoftwareDetails softwareDetails=softwareDetailsService.getSoftwareDetails(softwareSrNo);
-			System.out.println(softwareDetails);
 			softwareDetailsService.deleteSoftwareDetails(softwareDetails);
 			
 			response.getWriter().append("Software Deleted");

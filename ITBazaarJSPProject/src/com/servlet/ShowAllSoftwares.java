@@ -52,10 +52,6 @@ public class ShowAllSoftwares extends HttpServlet {
 			SoftwareDetailsService softwareDetailsService=new SoftwareDetailsServiceImpl();
 			List<SoftwareDetails> productlist=new ArrayList<SoftwareDetails>();
 			productlist=softwareDetailsService.getAllSoftware();
-//			for(SoftwareDetails soft:productlist)
-//			{
-//				System.out.println(soft);
-//			}
 			session.setAttribute("productlist", productlist);
 			request.getRequestDispatcher("AdminShowSoftwareDetails.jsp").forward(request, response);
 		}

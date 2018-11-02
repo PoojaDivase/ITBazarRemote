@@ -50,8 +50,6 @@ public class HardwareCategoryController extends HttpServlet {
 		{
 			String selected_hardware=request.getParameter("hardware");
 			int category_id=Integer.parseInt(selected_hardware);
-			System.out.println("*************************");
-			System.out.println(category_id);
 			
 		
 			AdminOperationsService adminOperationService=new AdminOperationsServiceImpl();

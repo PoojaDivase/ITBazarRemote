@@ -57,10 +57,6 @@ public class ShowAllOrdersForParticularCustomerController extends HttpServlet {
 			OrderService orderService=new OrderServiceImpl();
 			List<Order> orderlist=new ArrayList<Order>();
 			orderlist=orderService.getAllOrderDetailsForParticularCustomer(customer_id);
-			for(Order o:orderlist)
-			{
-				System.out.println(o);
-			}
 			
 			
 			session.setAttribute("orderlist", orderlist);

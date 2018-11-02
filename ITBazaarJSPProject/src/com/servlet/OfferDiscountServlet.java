@@ -128,11 +128,7 @@ public class OfferDiscountServlet extends HttpServlet {
 				System.out.println(order);
 				currentorder.add(order);
 			}
-			System.out.println("****************");
-			for(Order o:currentorder)
-			{
-				System.out.println(o);
-			}
+			
 			
 			session.setAttribute("currentorder",currentorder);
 			request.getRequestDispatcher("ViewCurrentOrderDetails.jsp").forward(request, response);

@@ -59,7 +59,6 @@ public class AdminCheckHardwareStock extends HttpServlet {
 				{
 					HardwareDetails hardwareDetails=new HardwareDetails();
 					hardwareDetails=allproducts.get(i);
-					System.out.println(hardwareDetails);
 					productlist.add(hardwareDetails);
 					
 					
