@@ -8,11 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Customer Page</title>
 </head>
-<body background="C:\Users\Administrator\Desktop\Final Project\cu.jpg">
+<body background="C:\Users\Administrator\Desktop\customer2.png">
 
 <center>
 <%
+
 Customer customer=(Customer) session.getAttribute("customer");
+session.setAttribute("customer",customer);
 int cid = customer.getCid();
 if(session==null)
 {
@@ -22,7 +24,7 @@ if(session==null)
 else
 {
 %>
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 <table border=1>
 		<tr><td> Customer Cid : </td><td><%=customer.getCid()%></td></tr>
 		<tr><td> Customer Name :</td><td><%=customer.getCname() %></td></tr>
@@ -43,19 +45,28 @@ else
 		</form>
 <br>
 
-<form action="View My Details">
+<form action="ShowCustomerDetails.jsp">
 <input type="submit" value="View My Details"></form>
 
 <br>
-<form action="PlaceOrder.jsp">
-<input type="submit" value="Place Order"></form>
+<form action="PlaceHardwareOrder.jsp">
+<input type="submit" value="Place Hardware Order"></form>
+<br>
+<br>
+<form action="PlaceSoftwareOrder.jsp">
+<input type="submit" value="Place Software Order"></form>
 <br>
 
-<form action="ViewMyOrders.jsp">
-<input type="submit" value="View My Orders"></form>
+<form action="ShowAllOrdersForParticularCustomer">
+<input type="submit" value="View All Orders"></form>
 
 <br>
 
+
+<form action="OfferDiscount.jsp">
+<input type="submit" value="Place order in combination"></form>
+
+<br>
 <form method="post" action="Login.jsp">
 <input type="submit" name="Logout" value="Logout" /> <br> <br></form>
 

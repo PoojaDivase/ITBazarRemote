@@ -56,6 +56,8 @@ public class LoginCheker extends HttpServlet {
 			else  //send it to index.html
 		      { //
 		    	  //response.sendRedirect("index.html");
+				 HttpSession session=request.getSession(true);
+				 session.setAttribute(adminId, adminId);
 		    	  RequestDispatcher requestDispatcher=request.getRequestDispatcher("Login.jsp");
 		    	  response.getWriter().append("Wrong user id OR password");
 		    	  requestDispatcher.include(request, response);

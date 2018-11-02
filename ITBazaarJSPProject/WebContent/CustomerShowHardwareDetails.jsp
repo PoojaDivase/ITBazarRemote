@@ -13,7 +13,7 @@
 <%
 if(session.getAttribute("productlist")==null)
 {
-	response.sendRedirect("Customer.jsp");
+	response.sendRedirect("Login.jsp");
 }
 %>
 

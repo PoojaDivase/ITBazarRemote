@@ -7,6 +7,7 @@
 <title>Add Software</title>
 </head>
 <body>
+
 <center>
 <h1>Add Hardware</h1>
 <hr />
@@ -25,5 +26,6 @@
 		<input type="submit" value="Back" name="Back" />
 	</form>
 </center>
+
 </body>
 </html>

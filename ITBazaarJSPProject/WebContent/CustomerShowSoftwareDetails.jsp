@@ -12,7 +12,7 @@
 <%
 if(session.getAttribute("productlist")==null)
 {
-	response.sendRedirect("Admin.jsp");
+	response.sendRedirect("Login.jsp");
 }
 %>
 <h1>Software Details</h1>

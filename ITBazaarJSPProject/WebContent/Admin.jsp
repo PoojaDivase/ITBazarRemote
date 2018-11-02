@@ -10,26 +10,15 @@
 </head>
 <body
 	background="C:\Users\Administrator\Desktop\admin.jpg">
+	
+
 	<center>
 		
 
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			
 			<form action="HardwareCategory" method="post">
-			<legend>Hardware</legend>
+			<legend> Hardware</legend>
 			<select  name="hardware">
 				<option value="101">Laptop</option>
 				<option value="102">Mobile</option>
@@ -60,7 +49,19 @@
 			</form>
 			<br>
 
+			<form action="AdminShowAllOrders" method="post">
+				<input type="submit" value="Show all Orders" name="Show all Orders"/>
+			</form></td>
 <table>
+<tr><td>
+			<form action="AdminCheckHardwareStock" method="post">
+				<input type="submit" value="Check Hardware Stock" name="Check Hardware Stock"/>
+			</form></td>
+</td><td>
+			<form action="AdminCheckSoftwareStock" method="post">
+				<input type="submit" value="Check Software Stock" name="Check Software Stock"/>
+			</form>
+</td></tr>
 <tr><td>
 			<form action="AddHardware.jsp" method="post">
 				<input type="submit" value="Add Hardware" name="Add_Hardware"/>

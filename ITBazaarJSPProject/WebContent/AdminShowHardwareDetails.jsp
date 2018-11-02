@@ -12,7 +12,7 @@
 <%
 if(session.getAttribute("productlist")==null)
 {
-	response.sendRedirect("Admin.jsp");
+	response.sendRedirect("Login.jsp");
 }
 %>
 
@@ -40,9 +40,6 @@ if(session.getAttribute("productlist")==null)
 			<td><c:out value="${category.hardwareDiscount} " /></td>
 			<td><c:out value="${category.hardwareManufacture}" /></td>
 			<td><c:out value="${category.color} " /></td>
-			
-			
-
 		</tr>
 		</c:forEach>
 	</tbody>
