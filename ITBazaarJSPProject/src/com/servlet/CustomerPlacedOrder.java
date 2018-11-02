@@ -127,7 +127,7 @@ public class CustomerPlacedOrder extends HttpServlet {
 			}
 			catch(NullPointerException e)
 			{
-				response.getWriter().append("Wrong input");
+				response.getWriter().append("OUT of stock");
 				RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
 				requestDispatcher.include(request, response);
 			}
