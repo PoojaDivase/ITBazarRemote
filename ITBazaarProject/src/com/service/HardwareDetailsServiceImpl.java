@@ -73,6 +73,10 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService{
 		// TODO Auto-generated method stub
 		return hardwareDetailsDaoImpl.getHardwareDetailsWithList(hid);
 	}
+	public List<HardwareDetails> getListOfParticularHardwareType(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 
