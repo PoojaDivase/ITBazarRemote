@@ -8,23 +8,29 @@ public class Order {
 	Customer customer;
 	String productName,orderStatus;
 	Date orderDate;
+	int actualprice,discountedprice;
 	public Order() {
 		super();
 	}
-	public Order(int orderedQuantity, int orderedProductSrNo, Customer customer, String productName,
-			String orderStatus, Date orderDate) {
-		super();
 	
+	
+	public Order(int orderedQuantity, int orderedProductSrNo, Customer customer, String productName, String orderStatus,
+			Date orderDate, int actualprice, int discountedprice) {
+		super();
 		this.orderedQuantity = orderedQuantity;
 		this.orderedProductSrNo = orderedProductSrNo;
 		this.customer = customer;
 		this.productName = productName;
 		this.orderStatus = orderStatus;
 		this.orderDate = orderDate;
+		this.actualprice = actualprice;
+		this.discountedprice = discountedprice;
 	}
+
+
 	
 	public Order(int orderID, int orderedQuantity, int orderedProductSrNo, Customer customer, String productName,
-			String orderStatus, Date orderDate) {
+			String orderStatus, Date orderDate, int actualprice, int discountedprice) {
 		super();
 		this.orderID = orderID;
 		this.orderedQuantity = orderedQuantity;
@@ -33,7 +39,11 @@ public class Order {
 		this.productName = productName;
 		this.orderStatus = orderStatus;
 		this.orderDate = orderDate;
+		this.actualprice = actualprice;
+		this.discountedprice = discountedprice;
 	}
+
+
 	public int getOrderID() {
 		return orderID;
 	}
@@ -77,10 +87,34 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 	
+	public int getActualprice() {
+		return actualprice;
+	}
+
+
+	public void setActualprice(int actualprice) {
+		this.actualprice = actualprice;
+	}
+
+
+	public int getDiscountedprice() {
+		return discountedprice;
+	}
+
+
+	public void setDiscountedprice(int discountedprice) {
+		this.discountedprice = discountedprice;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Order [orderID=" + orderID + ", orderedQuantity=" + orderedQuantity + ", orderedProductSrNo="
 				+ orderedProductSrNo + ", customer=" + customer + ", productName=" + productName + ", orderStatus="
-				+ orderStatus + ", orderDate=" + orderDate + "]";
+				+ orderStatus + ", orderDate=" + orderDate + ", actualprice=" + actualprice + ", discountedprice="
+				+ discountedprice + "]";
 	}
+
+
+	
 	}

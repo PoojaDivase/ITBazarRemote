@@ -53,8 +53,10 @@ public class OrderDaoImpl implements OrderDao{
 			int OrderedProductSrNo=rs.getInt(COLOrderedProductSrNo);
 			String OrderStatus=rs.getString(COLOrderStatus);
 			Date date=rs.getDate(COLOrderDate);
+			int actualprice=rs.getInt(COLActualPrice);
+			int discountedprice=rs.getInt(COLDiscountedPrice);
 			
-			order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date);
+			order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date,actualprice,discountedprice);
 			
 			allOrderList.add(order);
 			return order;
@@ -86,8 +88,10 @@ public class OrderDaoImpl implements OrderDao{
 					int OrderedProductSrNo=rs.getInt(COLOrderedProductSrNo);
 					String OrderStatus=rs.getString(COLOrderStatus);
 					Date date=rs.getDate(COLOrderDate);
+					int actualprice=rs.getInt(COLActualPrice);
+					int discountedprice=rs.getInt(COLDiscountedPrice);
 					
-					order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date);
+					order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date,actualprice,discountedprice);
 					
 					allOrderList.add(order);
 				}
@@ -119,11 +123,13 @@ public class OrderDaoImpl implements OrderDao{
 					int OrderedProductSrNo=rs.getInt(COLOrderedProductSrNo);
 					String OrderStatus=rs.getString(COLOrderStatus);
 					Date date=rs.getDate(COLOrderDate);
+					int actualprice=rs.getInt(COLActualPrice);
+					int discountedprice=rs.getInt(COLDiscountedPrice);
 					
-					order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date);
+					order=new Order(OrderID, OrderedQuantity, OrderedProductSrNo, new CustomerDaoImpl().getCustomer(cid), ProductName, OrderStatus, date,actualprice,discountedprice);
 					
 					allOrderList.add(order);
-					return allOrderList;
+					
 					
 			}
 			
@@ -138,7 +144,7 @@ public class OrderDaoImpl implements OrderDao{
 
 	public void addOrderDetails(Order order) {
 		try {
-			sqlQuery="insert into "+TABLEOrders+"("+COLProductName+","+COLOrderedQuantity+","+COLOrderedProductSrNo+","+COLOrderStatus+","+COLCid+","+COLOrderDate+")"+" values(?,?,?,?,?,?)";
+			sqlQuery="insert into "+TABLEOrders+"("+COLProductName+","+COLOrderedQuantity+","+COLOrderedProductSrNo+","+COLOrderStatus+","+COLCid+","+COLOrderDate+","+COLActualPrice+","+COLDiscountedPrice+")"+" values(?,?,?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sqlQuery);
 			//pst.setInt(1,order.getOrderID());
 			pst.setString(1,order.getProductName());
@@ -147,6 +153,8 @@ public class OrderDaoImpl implements OrderDao{
 			pst.setString(4, order.getOrderStatus());
 			pst.setInt(5, order.getCustomer().getCid());
 			pst.setDate(6, order.getOrderDate());
+			pst.setInt(7, order.getActualprice());
+			pst.setInt(8, order.getDiscountedprice());
 			pst.executeUpdate();
 			allOrderList.add(order);
 			
@@ -160,9 +168,9 @@ public class OrderDaoImpl implements OrderDao{
 			Connection connection=DBConnection.getConnection();
 			String sqlQuery="delete from "+TABLEOrders+" where "+COLOrderID+"=?"+" and "+COLCid+"=?";
 			pst = connection.prepareStatement(sqlQuery);
-			
+			pst.setInt(1,order.getOrderID());
 			pst.setInt(2,order.getCustomer().getCid());
-			pst.setInt(2,order.getOrderID());
+			
 			int executeUpdate = pst.executeUpdate();
 			
 			allOrderList.remove(order);

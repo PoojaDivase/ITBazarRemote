@@ -20,7 +20,6 @@ public class CustomerDaoImpl implements CustomerDao{
 	Connection connection=DBConnection.getConnection(); //establishing the connection
 	ResultSet rs; //object of ResultSet
 	String sqlQuery; //Declaration of the sqlQuery variable as String
-
 	
 	public Customer getCustomer(int cid)
 	{
