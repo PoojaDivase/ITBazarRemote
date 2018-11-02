@@ -59,6 +59,8 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 		}
 		else
 		{
+			try
+			{
 			Customer customer=(Customer) session.getAttribute("customer");
 			int customer_id=customer.getCid();
 		
@@ -111,11 +113,10 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 				System.out.println(o);
 			}
 			
-			if(currentorder==null)
+			if(currentorder.isEmpty())
 			{
-				
+				response.getWriter().append("OUT of stock");
 				RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
-				response.getWriter().append("Wrong user id OR password");
 				requestDispatcher.include(request, response);
 			}
 			else
@@ -123,6 +124,13 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 			session.setAttribute("currentorder",currentorder);
 			request.getRequestDispatcher("ViewCurrentOrderDetails.jsp").forward(request, response);
 			}
+		}
+		catch(NullPointerException e)
+		{
+			response.getWriter().append("OUT of stock");
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
+			requestDispatcher.include(request, response);
+		}
 		}
 	}
 
