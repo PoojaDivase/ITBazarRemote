@@ -115,8 +115,9 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 			
 			if(currentorder.isEmpty())
 			{
-				response.getWriter().append("OUT of stock");
+				
 				RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
+				response.getWriter().append("Out of stock");
 				requestDispatcher.include(request, response);
 			}
 			else
@@ -124,13 +125,13 @@ public class CustomerPlaceSoftwareOrder extends HttpServlet {
 			session.setAttribute("currentorder",currentorder);
 			request.getRequestDispatcher("ViewCurrentOrderDetails.jsp").forward(request, response);
 			}
-		}
-		catch(NullPointerException e)
-		{
-			response.getWriter().append("OUT of stock");
-			RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
-			requestDispatcher.include(request, response);
-		}
+			}
+			catch(NullPointerException e)
+			{
+				response.getWriter().append("OUT of stock");
+				RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewCurrentOrderDetails.jsp");
+				requestDispatcher.include(request, response);
+			}
 		}
 	}
 

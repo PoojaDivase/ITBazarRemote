@@ -57,9 +57,9 @@ public class CustomerPlacedOrder extends HttpServlet {
 		}
 		else
 		{
+			
 			try{
 				
-			
 			Customer customer=(Customer) session.getAttribute("customer");
 			int customer_id=customer.getCid();
 		
