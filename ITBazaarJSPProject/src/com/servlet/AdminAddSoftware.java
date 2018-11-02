@@ -55,6 +55,7 @@ public class AdminAddSoftware extends HttpServlet {
 			String SrNo = request.getParameter("softwareSrNo");
 			int softwareSrNo=Integer.parseInt(SrNo);
 			String softwareName = request.getParameter("softwareName");
+			
 			String price = request.getParameter("softwarePrice");
 			int softwarePrice=Integer.parseInt(price);
 			String quantity=request.getParameter("softwareQuantity");
