@@ -12,18 +12,29 @@ import com.model.Software;
 import com.model.SoftwareDetails;
 
 public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
-	
+	/**
+	 * declaring the list of Software details table
+	 */
 	List<SoftwareDetails> allSoftwareDetailsList=new ArrayList<SoftwareDetails>();
+	/**
+	 * object of customer, preparedStatement, resultSet is created
+	 * String variable declaration for sqlQuery is created
+	 */
+
 	String sqlQuery;
 	PreparedStatement pst;
 	ResultSet rs;
 	Connection connection=DBConnection.getConnection();
 	SoftwareDetails softwareDetails;
 	
+	/**
+	 * Function to get a software detail for a particular sr.No
+	 */
 	public SoftwareDetails getSoftwareDetails(int SoftwareSrNo)
 	{
 		
 		try {
+			
 			SoftwareDetails item=new SoftwareDetails();
 			item.setSoftwareSrNo(SoftwareSrNo);
 			
@@ -33,6 +44,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			int index=allSoftwareDetailsList.indexOf(item);
 			return allSoftwareDetailsList.get(index);
 			}
+			/**
+			 * Query to get a software detail for a particular sr.No
+			 */
 			sqlQuery="select * from "+TABLESoftwareDetails+" where "+COLSoftwareSrNo+"="+"?";
 			
 			pst=connection.prepareStatement(sqlQuery);
@@ -45,6 +59,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 				return null;
 			}
 			
+			/**
+			 * getting the data
+			 */
 			 int sid=rs.getInt(COLsid);
 			SoftwareSrNo=rs.getInt(COLSoftwareSrNo);
 			String SoftwareName=rs.getString(COLSoftwareName);
@@ -56,6 +73,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			
 			softwareDetails=new SoftwareDetails(SoftwareSrNo, SoftwarePrice, SoftwareQuantity, SoftwareDiscount, new SoftwareDaoImpl().getSoftware(sid), SoftwareName, SoftwareManufacture);
 			
+			/**
+			 * add in the list and return
+			 */
 			
 			allSoftwareDetailsList.add(softwareDetails);
 			return softwareDetails;
@@ -70,11 +90,17 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 
 
 	}
+	/**
+	 * function to get all the Software details product
+	 */
 	public List<SoftwareDetails> getAllSoftware() {
 		// TODO Auto-generated method stub
 		
 		allSoftwareDetailsList=new ArrayList<SoftwareDetails>();
 		try {
+			/**
+			 * Query to get all the Software details product
+			 */
 			sqlQuery="select * from "+TABLESoftwareDetails;
 			
 			pst=connection.prepareStatement(sqlQuery);
@@ -84,6 +110,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				 int sid=rs.getInt(COLsid);
 				int SoftwareSrNo=rs.getInt(COLSoftwareSrNo);
 				String SoftwareName=rs.getString(COLSoftwareName);
@@ -93,6 +122,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 				int SoftwareDiscount=rs.getInt(COLSoftwareDiscount);
 
 				softwareDetails=new SoftwareDetails(SoftwareSrNo, SoftwarePrice, SoftwareQuantity, SoftwareDiscount, new SoftwareDaoImpl().getSoftware(sid), SoftwareName, SoftwareManufacture);
+				/**
+				 * adding it to the list and returning the list
+				 */
 				allSoftwareDetailsList.add(softwareDetails);	
 			}
 			return  allSoftwareDetailsList;
@@ -106,9 +138,15 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 		return null;
 	}
 
+	/**
+	 * Function to get all software details for a particular type of software
+	 */
 	public List<SoftwareDetails> getAllSoftwareDetailsForParticularType(int sid)
 	{
 		allSoftwareDetailsList=new ArrayList<SoftwareDetails>();
+		/**
+		 * Query to get all software details for a particular type of software
+		 */
 		sqlQuery="select * from "+TABLESoftwareDetails+" where "+COLsid+"="+"?";
 		try {
 			pst = connection.prepareStatement(sqlQuery);
@@ -118,6 +156,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				sid=rs.getInt(COLsid);
 				int SoftwareSrNo=rs.getInt(COLSoftwareSrNo);
 				String SoftwareName=rs.getString(COLSoftwareName);
@@ -128,7 +169,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 				int SoftwareDiscount=rs.getInt(COLSoftwareDiscount);
 				
 				softwareDetails=new SoftwareDetails(SoftwareSrNo, SoftwarePrice, SoftwareQuantity, SoftwareDiscount, new SoftwareDaoImpl().getSoftware(sid), SoftwareName, SoftwareManufacture);
-				
+				/**
+				 * adding it to the list and return
+				 */
 				allSoftwareDetailsList.add(softwareDetails);
 			}
 			
@@ -141,8 +184,14 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 		
 	}
 
+	/**
+	 * Function to add Software product
+	 */
 	public void addSoftwareDetails(SoftwareDetails softwareDetails) {
 		try {
+			/**
+			 * Query to add Software product
+			 */
 			sqlQuery="insert into "+TABLESoftwareDetails+"("+COLSoftwareSrNo+","+COLSoftwareName+","+COLSoftwarePrice+","+COLSoftwareQuantity+","+COLSoftwareManufacture+","+COLSoftwareDiscount+","+COLsid+")"+" values(?,?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sqlQuery);
 			pst.setInt(1,softwareDetails.getSoftwareSrNo());
@@ -154,6 +203,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			pst.setInt(6, softwareDetails.getSoftwareDiscount());
 			pst.setInt(7, softwareDetails.getSoftware().getSid());
 			pst.executeUpdate();
+			/**
+			 * add it to the list
+			 */
 			allSoftwareDetailsList.add(softwareDetails);
 			
 		} catch (SQLException e) {
@@ -161,16 +213,24 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Function to delete a particular product
+	 */
 	public void deleteSoftwareDetails(SoftwareDetails softwareDetails) {
 		try {
-			Connection connection=DBConnection.getConnection();
-			String sqlQuery="delete from "+TABLESoftwareDetails+" where "+COLSoftwareSrNo+"=?";
+			/**
+			 * Query to delete a particular product
+			 */
+			sqlQuery="delete from "+TABLESoftwareDetails+" where "+COLSoftwareSrNo+"=?";
 			pst = connection.prepareStatement(sqlQuery);
 			
 			//pst.setInt(1,softwareDetails.getSoftware().getSid());
 			pst.setInt(1,softwareDetails.getSoftwareSrNo());
 			pst.executeUpdate();
 			
+			/**
+			 * remove from the list
+			 */
 			allSoftwareDetailsList.remove(softwareDetails);
 			
 //			
@@ -180,12 +240,18 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 		}
 		
 	}
+
+	/**
+	 * Function to update any product details with quantity, discount, price
+	 */
 	public void updateSoftwareDetails(SoftwareDetails softwareDetails)
 	{
 		try {
 			int software_SRNo=softwareDetails.getSoftwareSrNo();
-			Connection connection=DBConnection.getConnection();
-			String sqlQuery="update "+TABLESoftwareDetails+" set "+COLSoftwareQuantity+" =? ,"+COLSoftwarePrice+" =? , "+COLSoftwareDiscount+" =? "+" where "+COLSoftwareSrNo+"= "+software_SRNo;
+			/**
+			 * Query to update any product details with quantity, discount, price
+			 */
+			 sqlQuery="update "+TABLESoftwareDetails+" set "+COLSoftwareQuantity+" =? ,"+COLSoftwarePrice+" =? , "+COLSoftwareDiscount+" =? "+" where "+COLSoftwareSrNo+"= "+software_SRNo;
 			pst = connection.prepareStatement(sqlQuery);
 			
 			pst.setInt(1,softwareDetails.getSoftwareQuantity());
@@ -200,11 +266,18 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 		}
 		
 	}
+
+	/**
+	 * Function to get software details of a particular type
+	 */
 	@Override
 	public List<Software> getSoftwareDetailsWithList(int sid) {
 		
 		allSoftwareDetailsList=new ArrayList<SoftwareDetails>();
 		List <Software> softwareList=new ArrayList<Software>();
+		/**
+		 * Query to get software details of a particular type
+		 */
 		sqlQuery="select * from "+TABLESoftwareDetails+" where "+COLsid+"="+"?";
 		try {
 			pst = connection.prepareStatement(sqlQuery);
@@ -215,6 +288,9 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				sid=rs.getInt(COLsid);
 				int SoftwareSrNo=rs.getInt(COLSoftwareSrNo);
 				String SoftwareName=rs.getString(COLSoftwareName);
@@ -224,6 +300,10 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 				int SoftwareDiscount=rs.getInt(COLSoftwareDiscount);
 
 				softwareDetails=new SoftwareDetails(SoftwareSrNo, SoftwarePrice, SoftwareQuantity, SoftwareDiscount, new SoftwareDaoImpl().getSoftware(sid), SoftwareName, SoftwareManufacture);
+				
+				/**
+				 * add it into the list
+				 */
 				allSoftwareDetailsList.add(softwareDetails);	
 				
 			}
@@ -231,7 +311,6 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 			{
 				softwareList.add(softwareDetails.getSoftware());
 			}
-			
 			return softwareList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -239,9 +318,4 @@ public class SoftwareDetailsDaoImpl  implements SoftwareDetailsDao{
 		}
 		return null;
 	}
-	
-	
-	
-	
-
 }

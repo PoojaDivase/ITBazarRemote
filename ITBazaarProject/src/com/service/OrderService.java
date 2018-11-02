@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.model.Order;
 
+/**
+ * interface for order 
+ * @author Administrator
+ *
+ */
 public interface OrderService {
 
 	public void updateOrderDetails(Order order);

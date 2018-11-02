@@ -6,6 +6,9 @@ import com.model.SoftwareDetails;
 
 public class SoftwareSorting implements Comparator<SoftwareDetails>{
 
+	/**
+	 * comparing names for software for sorting
+	 */
 	@Override
 	public int compare(SoftwareDetails o1, SoftwareDetails o2) {
 		

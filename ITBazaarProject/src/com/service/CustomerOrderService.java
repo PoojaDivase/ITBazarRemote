@@ -11,6 +11,6 @@ public interface CustomerOrderService {
 	//public SoftwareDetails SearchSoftwareByName(String search);
 	public Order PlaceHardwareOrder(HardwareDetails hardwareDetails,int customerId);
 	public Order PlaceSoftwareOrder(SoftwareDetails softwareDetails,int customerId);
-	public int bulkDiscountHardware(int SrNo,int quantity);
+	//public int bulkDiscountHardware(int SrNo,int quantity);
 
 }

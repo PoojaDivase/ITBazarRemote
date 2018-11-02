@@ -16,13 +16,18 @@ import com.model.SoftwareDetails;
 
 public class CombinationOrderServiceImpl implements CombinationOrderService{
 
-	
+	/**
+	 * object creation
+	 */
 	HardwareDetailsServiceImpl hardwareDetailsService=new HardwareDetailsServiceImpl();
 	SoftwareDetailsService softwareDetailsService=new SoftwareDetailsServiceImpl();
 	
 
 	
 
+	/**
+	 * Function to Place Hardware Order
+	 */
 	@Override
 	public Order PlaceHardwareOrder(HardwareDetails hardwareDetails,int customerId) {
 		// TODO Auto-generated method stub
@@ -34,7 +39,10 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 		String hardwareName = hardwareDetails.getHardwareName();
 		int hardwareQuantity = hardwareDetails.getHardwareQuantity();
 	    java.sql.Date orderdate = new java.sql.Date((2017-1900), 12, 12);
-	    int Hquantity=detailsOfHardwareOrder.getHardwareQuantity();
+	    int Hquantity=detailsOfHardwareOrder.getHardwareQuantity(); 
+	    /**
+	     * condition to check the quantity order and quantity present in the table
+	     */
 		if(Hquantity>=hardwareQuantity)
 		{
 	
@@ -62,6 +70,9 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 		}
 	}
 
+	/**
+	 * Function to place order for software
+	 */
 	@Override
 	public Order PlaceSoftwareOrder(SoftwareDetails softwareDetails,int customerId) {
 		int SoftwareSrNo=softwareDetails.getSoftwareSrNo();
@@ -71,6 +82,9 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 		int softwareQuantity = softwareDetails.getSoftwareQuantity();
 	    java.sql.Date orderdate = new java.sql.Date((2017-1900), 12, 12);
 	    int Squantity=detailsOfSoftwareOrder.getSoftwareQuantity();
+	    /**
+	     * condition to check the quantity order and quantity present in the table
+	     */
 		if(Squantity>=softwareQuantity)
 		{
 	
@@ -99,6 +113,11 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 	//	softwareDetailsDaoImpl.updateSoftwareDetails(softwareDetails);
 		
 	}
+	
+	
+	/**
+	 * Function to calculate bulk order for hardware
+	 */
 	@Override
 	public int bulkDiscountHardware(int SrNo,int quantity)
 	{
@@ -112,6 +131,9 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 			HardwareDetailsDao hardwareDetailsDao =new HardwareDetailsDaoImpl();
 			hardwareDetails = hardwareDetailsDao.getHardwareDetails(SrNo);
 			int Hquantity=hardwareDetailsDao.getHardwareDetails(SrNo).getHardwareQuantity();
+			/**
+		     * condition to check the quantity order and quantity present in the table
+		     */
 			if(Hquantity>quantity)
 			{
 						if(quantity==1)
@@ -152,6 +174,12 @@ public class CombinationOrderServiceImpl implements CombinationOrderService{
 					return finalPrice;
 	}
 
+	/**
+	 * Function for bulk order of Software 
+	 * @param SrNo
+	 * @param quantity
+	 * @return
+	 */
 public int bulkDiscountSoftware(int SrNo,int quantity)
 {
 	int discount = 30;
@@ -164,6 +192,9 @@ public int bulkDiscountSoftware(int SrNo,int quantity)
 	SoftwareDetailsDao softwareDetailsDao =new SoftwareDetailsDaoImpl();
 	softwareDetails = softwareDetailsDao.getSoftwareDetails(SrNo);
 	int Hquantity=softwareDetailsDao.getSoftwareDetails(SrNo).getSoftwareQuantity();
+	/**
+     * condition to check the quantity order and quantity present in the table
+     */
 	if(Hquantity>quantity)
 	{
 				if(quantity==1)

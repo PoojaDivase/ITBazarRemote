@@ -5,6 +5,11 @@ import java.util.List;
 import com.model.Software;
 import com.model.SoftwareDetails;
 
+/**
+ * interface for software details
+ * @author Administrator
+ *
+ */
 public interface SoftwareDetailsService {
 
 	public SoftwareDetails getSoftwareDetails(int SoftwareSrNo);

@@ -13,14 +13,23 @@ import com.model.Customer;
 
 public class CustomerDaoImpl implements CustomerDao{
 
+	/**
+	 * an list of customer is created using util.List
+	 */
 	private static List<Customer>allCustomersList=new ArrayList<Customer>();
-
+/**
+ * object of customer, preparedStatement, resultSet is created
+ * String variable declaration for sqlQuery is created
+ */
 	Customer customer;
 	PreparedStatement pst; //creating the object of PreparedStatement
 	Connection connection=DBConnection.getConnection(); //establishing the connection
 	ResultSet rs; //object of ResultSet
 	String sqlQuery; //Declaration of the sqlQuery variable as String
-	
+
+	/**
+	 * Function for getting a particular customer
+	 */
 	public Customer getCustomer(int cid)
 	{
 		
@@ -34,6 +43,10 @@ public class CustomerDaoImpl implements CustomerDao{
 			int index=allCustomersList.indexOf(customerd);
 			return allCustomersList.get(index);
 			}
+			/**
+			 * Query to get a particular customer function
+			 */
+			
 			sqlQuery="select * from "+TABLECustomer+" where "+COLCid+"="+"?";
 			
 			pst=connection.prepareStatement(sqlQuery);
@@ -45,7 +58,9 @@ public class CustomerDaoImpl implements CustomerDao{
 			{
 				return null;
 			}
-			
+			/**
+			 * fetching data in resultSet object
+			 */
 			String name=rs.getString(COLCName);
 			String Address=rs.getString(COLAddress);
 			String email=rs.getString(COLEmail);
@@ -53,6 +68,9 @@ public class CustomerDaoImpl implements CustomerDao{
 			String userId=rs.getString(COLUserId);
 			String password=rs.getString(COLPassword);
 			
+			/**
+			 * insert into customer object
+			 */
 			customer=new Customer(cid,mobileNo, name, Address, email,userId,password);
 			allCustomersList.add(customer);
 			return customer;
@@ -66,20 +84,32 @@ public class CustomerDaoImpl implements CustomerDao{
 		return null;
 	}
 
+	/**
+	 * Function to get all customers
+	 */
 	@Override
 	public List<Customer> getAllCustomers() {
 		// TODO Auto-generated method stub
 		
 		
 		try {
+			/**
+			 * Query to get all the customers function
+			 */
+			
 			sqlQuery="select * from "+TABLECustomer;
 			
 			pst=connection.prepareStatement(sqlQuery);
 			pst.executeQuery();
 			rs=pst.getResultSet();
 			
+			/**
+			 * fetching data in resultSet object
+			 */
+			
 			while(rs.next())
 			{
+				
 				int cid=rs.getInt(COLCid);
 				String name=rs.getString(COLCName);
 				String Address=rs.getString(COLAddress);
@@ -88,15 +118,17 @@ public class CustomerDaoImpl implements CustomerDao{
 				String userId=rs.getString(COLUserId);
 				String password=rs.getString(COLPassword);
 				
+				/**
+				 * insert into customer object
+				 */
 				customer=new Customer(cid,mobileNo, name, Address, email,userId,password);
 				
+				/**
+				 * adding it to a list
+				 */
 				allCustomersList.add(customer);
-				
-				
+					
 			}
-			
-			
-			
 			return  allCustomersList;
 			
 			
@@ -106,17 +138,23 @@ public class CustomerDaoImpl implements CustomerDao{
 		}
 		
 		return null;
-
-		
-		
 	}
 
+	/**
+	 * function to add a customer
+	 */
 	@Override
 	public void addCustomer(Customer cust) {
 		try {
+			/**
+			 * Query to insert a new customer
+			 */
 			sqlQuery="insert into "+TABLECustomer+" values(?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sqlQuery);
 		//	pst.setInt(1,cust.getCid());
+			/**
+			 * setting of all data
+			 */
 			pst.setString(1, cust.getCname());
 			pst.setString(2,cust.getCaddress());
 			pst.setString(3,cust.getEmail());
@@ -124,6 +162,9 @@ public class CustomerDaoImpl implements CustomerDao{
 			pst.setString(5, cust.getUserId());
 			pst.setString(6, cust.getPassword());
 			pst.executeUpdate();
+			/**
+			 * adding it to a list
+			 */
 			allCustomersList.add(cust);
 			
 		} catch (SQLException e) {
@@ -135,9 +176,15 @@ public class CustomerDaoImpl implements CustomerDao{
 	@Override
 	public void updateCustomer(Customer cust) {
 		try {
+			/**
+			 * Query to update the customer details
+			 */
 			sqlQuery="update "+TABLECustomer+" set "+COLCName+"=?"+","+COLAddress+"=?"+","+COLMobileNo+"=?"+COLEmail+"=?"+" where "+COLCid+"=?";
 			pst = connection.prepareStatement(sqlQuery);
 			
+			/**
+			 * setting a data
+			 */
 			pst.setString(1,cust.getCname());
 			pst.setString(2,cust.getCaddress());
 			pst.setString(3,cust.getMobileNo());
@@ -151,13 +198,22 @@ public class CustomerDaoImpl implements CustomerDao{
 		}
 	}
 
+	/**
+	 * function to delete a customer
+	 */
 	@Override
 	public void deleteCustomer(Customer cust) {
 		try {
+			/**
+			 * Query to delete a customer details
+			 */
 			sqlQuery="delete from "+TABLECustomer+" where "+COLCid+"=?";
 			pst = connection.prepareStatement(sqlQuery);
 			pst.setInt(1,cust.getCid());
 			pst.executeUpdate();
+			/**
+			 * and remove it from the list
+			 */
 			allCustomersList.remove(cust);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -5,6 +5,11 @@ import java.util.List;
 import com.dao.CustomerExistsException;
 import com.model.Customer;
 
+/**
+ * interface for customer service layer
+ * @author Administrator
+ *
+ */
 public interface CustomerService {
 
 	List<Customer> getAllCustomers();

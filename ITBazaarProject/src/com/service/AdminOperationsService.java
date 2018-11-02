@@ -6,6 +6,11 @@ import com.model.Hardware;
 import com.model.HardwareDetails;
 import com.model.SoftwareDetails;
 
+/**
+ * interface for admin operations
+ * @author Administrator
+ *
+ */
 public interface AdminOperationsService {
 
 	public List<HardwareDetails> SortByHardwareName(int hid);

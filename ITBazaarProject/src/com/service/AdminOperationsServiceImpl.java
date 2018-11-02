@@ -13,6 +13,9 @@ public class AdminOperationsServiceImpl implements AdminOperationsService{
 	HardwareDetailsService hardwareDetailsService=new HardwareDetailsServiceImpl();
 	SoftwareDetailsService softwareDetailsService=new SoftwareDetailsServiceImpl();
 	
+	/**
+	 * Function to sort the hardware name
+	 */
 	@Override
 	public List<HardwareDetails> SortByHardwareName(int hid) {
 		List<HardwareDetails> allHardwareDetailsList1=hardwareDetailsService.getAllHardwareDetailsForParticularType(hid);
@@ -21,16 +24,18 @@ public class AdminOperationsServiceImpl implements AdminOperationsService{
 		return allHardwareDetailsList1;
 	}
 	
-
+/**
+ * list of hardware details
+ */
 	List<HardwareDetails> allHardwareDetailsList = new ArrayList<HardwareDetails>();
+	
+	/**
+	 * Function search hardware by name
+	 */
 	@Override
 	public HardwareDetails SearchHardwareByName(String search) {
 		
 		allHardwareDetailsList=hardwareDetailsService.getAllHardwareDetails();
-//		for(HardwareDetails hd:allHardwareDetailsList)
-//		{
-//			System.out.println(hd);
-//		}
 		for(HardwareDetails hd1:allHardwareDetailsList)
 		{
 			if(hd1.getHardwareName().equalsIgnoreCase(search))
@@ -41,7 +46,9 @@ public class AdminOperationsServiceImpl implements AdminOperationsService{
 		return null;
 	}
 	
-	
+	/**
+	 * Function sort software name by name
+	 */
 	@Override
 	public List<SoftwareDetails> SortBySoftwareName(int sid) {
 		List<SoftwareDetails> allSoftwareDetailsList1=softwareDetailsService.getAllSoftwareDetailsForParticularType(sid);
@@ -50,13 +57,12 @@ public class AdminOperationsServiceImpl implements AdminOperationsService{
 		return allSoftwareDetailsList1;
 		
 	}
+	/**
+	 * Function search software name by name
+	 */
 	@Override
 	public SoftwareDetails SearchSoftwareByName(String search) {
 		List<SoftwareDetails> allSoftwareDetailsList=softwareDetailsService.getAllSoftware();
-//		for(SoftwareDetails soft:allSoftwareDetailsList)
-//		{
-//			System.out.println(soft);
-//		}
 		for(SoftwareDetails soft:allSoftwareDetailsList)
 		{
 			if(soft.getSoftwareName().equalsIgnoreCase(search))

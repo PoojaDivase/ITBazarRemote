@@ -5,6 +5,11 @@ import java.util.List;
 import com.dao.HardwareExistsException;
 import com.model.Hardware;
 
+/**
+ * interface for hardware service layer
+ * @author Administrator
+ *
+ */
 public interface HardwareService {
 
 	public Hardware getHardware(int hid);

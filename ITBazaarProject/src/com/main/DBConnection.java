@@ -5,7 +5,14 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
+	/**
+	 * create a static connection object
+	 */
 	private static Connection connection;
+	/**
+	 * Function to get connection
+	 * @return
+	 */
 	public static Connection getConnection()
 	{
 		try {
@@ -20,6 +27,9 @@ public class DBConnection {
 		return  connection;
 	}
 	
+	/**
+	 * Function to create a connection
+	 */
 	private DBConnection()
 	{
 	

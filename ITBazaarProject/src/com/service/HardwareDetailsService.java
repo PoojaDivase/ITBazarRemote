@@ -5,6 +5,11 @@ import java.util.List;
 import com.model.Hardware;
 import com.model.HardwareDetails;
 
+/**
+ * interface to Hardware details service layer
+ * @author Administrator
+ *
+ */
 public interface HardwareDetailsService{
 
 	public HardwareDetails getHardwareDetails(int HardwareSrNo);

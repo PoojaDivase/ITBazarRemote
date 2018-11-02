@@ -12,14 +12,24 @@ import com.model.Hardware;
 import com.model.HardwareDetails;
 
 public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
-	
+	/**
+	 * creating a list of HardwareDetails
+	 */
 	List<HardwareDetails> allHardwareDetailsList=new ArrayList<HardwareDetails>();
+	/**
+	 * object of customer, preparedStatement, resultSet is created
+	 * String variable declaration for sqlQuery is created
+	 */
+
 	String sqlQuery;
 	PreparedStatement pst;
 	ResultSet rs;
 	Connection connection=DBConnection.getConnection();
 	HardwareDetails hardwareDetails;
 	
+	/**
+	 * get HardwareDetails with a particular HardwaresrNo
+	 */
 	public HardwareDetails getHardwareDetails(int HardwareSrNo)
 	{
 		
@@ -33,6 +43,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			int index=allHardwareDetailsList.indexOf(item);
 			return allHardwareDetailsList.get(index);
 			}
+			/**
+			 * Query to get a particular HardwareDetails 
+			 */
 			sqlQuery="select * from "+TABLEHardwareDetails+" where "+COLHardwareSrNo+"="+"?";
 			
 			pst=connection.prepareStatement(sqlQuery);
@@ -45,6 +58,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 				return null;
 			}
 			
+			/**
+			 * get the data into variables
+			 */
 			 int hid=rs.getInt(COLhid);
 			HardwareSrNo=rs.getInt(COLHardwareSrNo);
 			String HardwareName=rs.getString(COLHardwareName);
@@ -55,7 +71,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			int HardwareDiscount=rs.getInt(COLHardwareDiscount);
 			
 			hardwareDetails=new HardwareDetails(HardwareSrNo, HardwarePrice, HardwareQuantity, HardwareDiscount, new HardwareDaoImpl().getHardware(hid), HardwareName, HardwareManufacture, color);
-			
+			/**
+			 * add it to the list
+			 */
 			allHardwareDetailsList.add(hardwareDetails);
 			return hardwareDetails;
 			
@@ -69,11 +87,18 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 
 
 	}
+	
+	/**
+	 * Function to get all the hardwareDetails
+	 */
 	public List<HardwareDetails> getAllHardwareDetails() {
 		// TODO Auto-generated method stub
 		
 		allHardwareDetailsList=new ArrayList<HardwareDetails>();
 		try {
+			/**
+			 * Query to get all the hardwareDetails
+			 */
 			sqlQuery="select * from "+TABLEHardwareDetails;
 			
 			pst=connection.prepareStatement(sqlQuery);
@@ -83,6 +108,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				 int hid=rs.getInt(COLhid);
 				int HardwareSrNo=rs.getInt(COLHardwareSrNo);
 				String HardwareName=rs.getString(COLHardwareName);
@@ -93,8 +121,14 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 				int HardwareDiscount=rs.getInt(COLHardwareDiscount);
 
 				hardwareDetails=new HardwareDetails(HardwareSrNo, HardwarePrice, HardwareQuantity, HardwareDiscount, new HardwareDaoImpl().getHardware(hid), HardwareName, HardwareManufacture, color);
+				/**
+				 * add it into the list
+				 */
 				allHardwareDetailsList.add(hardwareDetails);	
 			}
+			/**
+			 * return the list
+			 */
 			return  allHardwareDetailsList;
 			
 			
@@ -106,9 +140,15 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 		return null;
 	}
 
+	/**
+	 * function to get all hardware details for a particular type
+	 */
 	public List<HardwareDetails> getAllHardwareDetailsForParticularType(int hid)
 	{
 		allHardwareDetailsList=new ArrayList<HardwareDetails>();
+		/**
+		 * Query to get all hardware details for a particular type
+		 */
 		sqlQuery="select * from "+TABLEHardwareDetails+" where "+COLhid+"="+"?";
 		try {
 			pst = connection.prepareStatement(sqlQuery);
@@ -118,6 +158,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				hid=rs.getInt(COLhid);
 				int HardwareSrNo=rs.getInt(COLHardwareSrNo);
 				String HardwareName=rs.getString(COLHardwareName);
@@ -128,7 +171,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 				int HardwareDiscount=rs.getInt(COLHardwareDiscount);
 				
 				hardwareDetails=new HardwareDetails(HardwareSrNo, HardwarePrice, HardwareQuantity, HardwareDiscount, new HardwareDaoImpl().getHardware(hid), HardwareName, HardwareManufacture, color);
-				
+				/**
+				 * adding it to the list
+				 */
 				allHardwareDetailsList.add(hardwareDetails);
 			}
 			
@@ -140,48 +185,14 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 		return null;
 		
 	}
-//	@Override
-//	public List<Enrollment> getEnrollmentforCourse(int cid) {
-//		// TODO Auto-generated method stub
-//		
-//		allEnrollmentList=new ArrayList<Enrollment>();
-//		Connection connection=DBConnection.getConnection();
-//		String sqlQuery="select * from "+TABLEenroll+" where "+COLcid+"="+"?";
-//		
-//		PreparedStatement pst;
-//		try {
-//			pst = connection.prepareStatement(sqlQuery);
-//			pst.setInt(1, cid);
-//			pst.executeQuery();
-//			ResultSet rs=pst.getResultSet();
-//
-//			
-//			while(rs.next())
-//			{
-//				int sid=rs.getInt(COLsid);
-//				 cid=rs.getInt(COLcid);
-//				Date enrolldate=rs.getDate(COLenrolldate);
-//				int feespaid=rs.getInt(COLfeespaid);
-//				
-//				Enrollment enroll=new Enrollment(new StudentDaoimpl().getStudent(sid),new CourseDaoimpl().getcourse(cid),enrolldate,feespaid);
-//				allEnrollmentList.add(enroll);
-//				
-//			}
-//			return  allEnrollmentList;
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		
-//
-//		return null;
-//	}
-//
-//
+	/**
+	 * function to add Hardware product
+	 */
 	public void addHardwareDetails(HardwareDetails hardwareDetails) {
 		try {
+			/**
+			 * Query to add a product in the table
+			 */
 			sqlQuery="insert into "+TABLEHardwareDetails+"("+COLHardwareSrNo+","+COLHardwareName+","+COLHardwarePrice+","+COLHardwareQuantity+","+COLHardwareManufacture+","+COLColor+","+COLHardwareDiscount+","+COLhid+")"+" values(?,?,?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sqlQuery);
 			pst.setInt(1,hardwareDetails.getHardwareSrNo());
@@ -200,9 +211,15 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * function to delete a particular hardware product
+	 */
 	public void deleteHardwareDetails(HardwareDetails hardwareDetails) {
 		try {
 			Connection connection=DBConnection.getConnection();
+			/** 
+			 * Query to delete a hardware product
+			 */
 			String sqlQuery="delete from "+TABLEHardwareDetails+" where "+COLHardwareSrNo+"=?";
 			pst = connection.prepareStatement(sqlQuery);
 			
@@ -210,29 +227,43 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			pst.setInt(1,hardwareDetails.getHardwareSrNo());
 			pst.executeUpdate();
 			
+			/**
+			 * remove it from the list
+			 */
 			allHardwareDetailsList.remove(hardwareDetails);
-			
-//			
+				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
+	/**
+	 * Function to update the hardwareDetails about the product
+	 */
 	public void updateHardwareDetails(HardwareDetails hardwareDetails)
 	{
 		
 		try {
 			Connection connection=DBConnection.getConnection();
 			int hardwareSrNo = hardwareDetails.getHardwareSrNo();
+			/**
+			 * Query to  update details which can update only quantity, price, discount
+			 */
 			String sqlQuery="update "+ TABLEHardwareDetails +" set "+COLHardwareQuantity+" =? , "+ COLHardwarePrice + " =? , "+ COLHardwareDiscount + " =? " + " where "+COLHardwareSrNo+" = " +hardwareSrNo;
 			pst = connection.prepareStatement(sqlQuery);
 			
+			/**
+			 * setting the data
+			 */
 			pst.setInt(1, hardwareDetails.getHardwareQuantity());
 			pst.setInt(2, hardwareDetails.getHardwarePrice());
 			pst.setInt(3 ,hardwareDetails.getHardwareDiscount());
 			pst.executeUpdate();
 			
+			/**
+			 *  in all list and with a particular No.
+			 */
 			for(HardwareDetails allhardwareDetails:allHardwareDetailsList)
 			{
 				if(allhardwareDetails.getHardwareSrNo()==hardwareDetails.getHardwareSrNo())
@@ -250,11 +281,18 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 		}
 		
 	}
+	
+	/**
+	 * get the hardware details of a particular type 
+	 */
 	@Override
 	public List<Hardware> getHardwareDetailsWithList(int hid) {
 		
 		allHardwareDetailsList=new ArrayList<HardwareDetails>();
 		List <Hardware> hardwareList=new ArrayList<Hardware>();
+		/**
+		 * Query to get the hardware details of a particular type
+		 */
 		sqlQuery="select * from "+TABLEHardwareDetails+" where "+COLhid+"="+"?";
 		try {
 			pst = connection.prepareStatement(sqlQuery);
@@ -265,6 +303,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 			
 			while(rs.next())
 			{
+				/**
+				 * getting the data
+				 */
 				hid=rs.getInt(COLhid);
 				int HardwareSrNo=rs.getInt(COLHardwareSrNo);
 				String HardwareName=rs.getString(COLHardwareName);
@@ -275,6 +316,9 @@ public class HardwareDetailsDaoImpl implements HardwareDetailsDao{
 				int HardwareDiscount=rs.getInt(COLHardwareDiscount);
 
 				hardwareDetails=new HardwareDetails(HardwareSrNo, HardwarePrice, HardwareQuantity, HardwareDiscount, new HardwareDaoImpl().getHardware(hid), HardwareName, HardwareManufacture, color);
+				/**
+				 * adding it to the list
+				 */
 				allHardwareDetailsList.add(hardwareDetails);	
 				
 			}

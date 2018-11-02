@@ -34,6 +34,5 @@ public class main {
 			System.out.println(sortedList);
 		}
 		
-		
 	}
 }

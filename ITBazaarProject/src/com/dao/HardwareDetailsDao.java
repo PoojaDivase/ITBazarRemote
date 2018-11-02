@@ -5,7 +5,15 @@ import java.util.List;
 import com.model.Hardware;
 import com.model.HardwareDetails;
 
+/**
+ * interface for HardwareDetails Table with all the DAO functionalities
+ * @author Administrator
+ *
+ */
 public interface HardwareDetailsDao {
+	/**
+	 * declaration of all variables 
+	 */
 	String TABLEHardwareDetails="hardwareDetails",COLhid="hid",
 			COLHardwareSrNo="hardwareSrNo",
 			COLHardwarePrice="hardwarePrice",

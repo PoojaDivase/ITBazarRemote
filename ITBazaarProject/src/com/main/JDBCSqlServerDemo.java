@@ -16,12 +16,16 @@ import com.model.Customer;
 import com.model.Hardware;
 import com.model.HardwareDetails;
 import com.model.Order;
+import com.model.SoftwareDetails;
+import com.service.CustomerOrderService;
+import com.service.CustomerOrderServiceImpl;
 
 /*jdbc:sqlserver://=name of protocol SQLEXPRESS=server instance*/
 
 public class JDBCSqlServerDemo {
 
 	public static void main(String[] args) {
+		
 		OrderDao orderDao=new OrderDaoImpl();
 		CustomerDao customerDao=new CustomerDaoImpl();
 //		List<Order> allorders=orderDao.getAllOrderDetails();
@@ -300,5 +304,125 @@ public class JDBCSqlServerDemo {
 		 */
 
 	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*OrderDao orderDao=new OrderDaoImpl();
+		CustomerDao customerDao=new CustomerDaoImpl();*/
+		//List<Order> allorders=orderDao.getAllOrderDetails();
+		/*for(Order o:allorders)
+		{
+			System.out.println(o);
+		}
+		*/
+	
+		/*
+		 * 
+		 * KEJAL AND ME
+		 * 
+		 * CustomerOrderService cos=new CustomerOrderServiceImpl();
+		SoftwareDetails searchSoftwareByName = cos.SearchSoftwareByName("MS Office 2016");
+		
+		System.out.println(searchSoftwareByName);
+		cos.PlaceSoftwareOrder(searchSoftwareByName);
+		
+		List<Order> allOrderDetails = orderDao.getAllOrderDetails();
+		
+		for(Order orderDao1 : allOrderDetails)
+		{
+			System.out.println(orderDao1);
+			
+			}*/
+		
+			
+		//Customer customer2=customerDao.getCustomer(1);
+//		Order order=new Order(10, 566,customer2, "Hp", "incomplete",null);
+//		
+//			orderDao.addOrderDetails(order);
+//		System.out.println("***************");
+//		Order order=orderDao.getOrderDetails(500);
+//		System.out.println(order);
+		//Customer customer2=customerDao.getCustomer(7);
+		//System.out.println(customer2);
+		//try {
+//			customerDao.addCustomer(customer);
+//		} catch (CustomerExistsException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Customer customer2=customerDao.getCustomer(7);
+//		System.out.println(customer2);
+//		HardwareDao hardware = new HardwareDaoImpl();
+//
+//		
+//		List<Hardware> allHardware=hardware.getAllHardwares();
+//		
+//		Hardware hard1=new Hardware(106, "Accessories");
+//		try {
+//			hardware.addHardware(hard1);
+//			System.out.println(hard1);
+//		} catch (HardwareExistsException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		
+//		System.out.println("In the JDBC SQL MAIN");
+//		for(Hardware hardware1 : allHardware)
+//		{
+//			System.out.println(hardware1);
+//		}
+//		
+//			//	System.out.println(hard);
+//		
+//		System.out.println("ALL HArdware Details");
+//		HardwareDetailsDao hardwareDetails=new HardwareDetailsDaoImpl();
+//		List<HardwareDetails> allHardware1=hardwareDetails.getAllHardwareDetails();
+//		
+//		HardwareDetails hd=new HardwareDetails(120, 200, 15, 15,new HardwareDaoImpl().getHardware(103), "Sandisk 4GB", "Sandisk", "red");
+//		hardwareDetails.addHardwareDetails(hd);
+//		System.out.println(hd);
+//		
+//		for(HardwareDetails hardware1 : allHardware1)
+//		{
+//			System.out.println(hardware1);
+//		}
+//		
+//		CustomerDao cust=new CustomerDaoImpl();
+//		List<Customer> allCust = cust.getAllCustomers();
+//		for(Customer c : allCust)
+//		{
+//			System.out.println(c);
+//		}
+	
+	
 
-}
+		
+	}
+
+

@@ -5,7 +5,15 @@ import java.util.List;
 import com.model.Software;
 import com.model.SoftwareDetails;
 
+/**
+ * interface for software details table with all the dAo functionalities
+ * @author Administrator
+ *
+ */
 public interface SoftwareDetailsDao {
+	/**
+	 * declaration of the variables 
+	 */
 	String TABLESoftwareDetails="softwareDetails",COLsid="sid",
 			COLSoftwareSrNo="softwareSrNo",
 			COLSoftwarePrice="softwarePrice",
