@@ -46,12 +46,14 @@ public class AdminSearchProduct extends HttpServlet {
 		}
 		else
 		{
+			try{
 			String searchstr=request.getParameter("search");
 			System.out.println(searchstr);
 			String product_type=request.getParameter("type");
 			System.out.println(product_type);
 			if(product_type.equals("hardware"))
 			{
+				try{
 				AdminOperationsService adminOperationsService=new AdminOperationsServiceImpl();
 				HardwareDetails searchedHardware=adminOperationsService.SearchHardwareByName(searchstr);
 				System.out.println(searchedHardware);
@@ -60,10 +62,16 @@ public class AdminSearchProduct extends HttpServlet {
 				
 				session.setAttribute("productlist", productlist);
 				request.getRequestDispatcher("AdminShowHardwareDetails.jsp").forward(request, response);
-				
+				}catch(NullPointerException e)
+				{
+					response.getWriter().append("Wrong input");
+					RequestDispatcher requestDispatcher=request.getRequestDispatcher("AdminShowSoftwareDetails.jsp");
+					requestDispatcher.include(request, response);
+				}
 			}
 			else if(product_type.equals("software"))
 			{
+				try{
 				AdminOperationsService adminOperationsService=new AdminOperationsServiceImpl();
 				SoftwareDetails searchedSoftware=adminOperationsService.SearchSoftwareByName(searchstr);
 				System.out.println(searchedSoftware);
@@ -71,6 +79,18 @@ public class AdminSearchProduct extends HttpServlet {
 				productlist.add(searchedSoftware);
 				session.setAttribute("productlist", productlist);
 				request.getRequestDispatcher("AdminShowSoftwareDetails.jsp").forward(request, response);	
+				}catch(NullPointerException e)
+				{
+					response.getWriter().append("Wrong input");
+					RequestDispatcher requestDispatcher=request.getRequestDispatcher("AdminShowSoftwareDetails.jsp");
+					requestDispatcher.include(request, response);
+				}
+				}
+			}catch(NullPointerException e)
+			{
+				response.getWriter().append("Wrong input");
+				RequestDispatcher requestDispatcher=request.getRequestDispatcher("AdminShowSoftwareDetails.jsp");
+				requestDispatcher.include(request, response);
 			}
 		}
 

@@ -46,7 +46,8 @@ public class CustomerSearchProduct extends HttpServlet {
 			 requestDispatcher.include(request, response);
 		}
 		else
-		{
+		{	try{
+			
 			String searchstr=request.getParameter("search");
 			System.out.println(searchstr);
 			String product_type=request.getParameter("type");
@@ -73,8 +74,15 @@ public class CustomerSearchProduct extends HttpServlet {
 				session.setAttribute("productlist", productlist);
 				request.getRequestDispatcher("CustomerShowSoftwareDetails.jsp").forward(request, response);	
 			}
+		
+	}catch(NullPointerException e)
+	{
+		response.getWriter().append("Wrong input");
+		RequestDispatcher requestDispatcher=request.getRequestDispatcher("CustomerShowSoftwareDetails.jsp");
+		requestDispatcher.include(request, response);
+	}
+		
 		}
-
 	}
 
 	/**
