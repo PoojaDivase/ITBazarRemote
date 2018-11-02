@@ -1,7 +1,5 @@
 package com.test;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.After;
@@ -13,7 +11,6 @@ import org.junit.Test;
 
 import com.dao.CustomerDaoImpl;
 import com.dao.CustomerExistsException;
-import com.dao.HardwareDaoImpl;
 import com.model.Customer;
 import com.service.CustomerServiceImpl;
 
