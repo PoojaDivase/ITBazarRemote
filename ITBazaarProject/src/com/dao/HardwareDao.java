@@ -10,7 +10,7 @@ import com.model.Hardware;
  */
 public interface HardwareDao {
 /**
- * declaration of variables
+ * declaration of variables 
  */
 	String TABLEhardware="hardware",COLhid="hid",COLhcategory="hcategory";
 
